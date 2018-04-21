@@ -42,15 +42,16 @@ probabilities = ProbabilitiesCalculator.new(
   women, men, possible_men_permutations
 ).probabilities
 
-puts "There are #{number_of_permutations} possible combinations remaining (initially 3628800)"
+puts "There #{number_of_permutations == 1 ? 'is' : 'are'} #{number_of_permutations} possible combination#{'s' unless number_of_permutations == 1} remaining (initially 3628800)"
 puts
 
-if number_of_permutations < 5
-  puts women.join(';')
+if number_of_permutations <= 5
   possible_men_permutations.each do |men_permutation|
-    puts men_permutation.join(';')
+    men_permutation.each_with_index do |man, i|
+      puts "#{women[i]} & #{man}"
+    end
+    puts
   end
-  puts
 end
 
 print ';'
