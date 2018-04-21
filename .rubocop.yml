@@ -4,3 +4,6 @@ Bundler/OrderedGems:
 Metrics/BlockLength:
   Exclude:
     - spec/**/*.rb
+
+Metrics/MethodLength:
+  Max: 15

@@ -4,6 +4,7 @@
 # rubocop:disable Lint/MissingCopEnableDirective, Metrics/LineLength
 
 require './lib/possible_permutations_resolver'
+require './lib/probabilities_calculator'
 
 women = %w[Angelica Renara Malin Anna Maria My Sanna Valle Mariele Emma]
 men = %w[Pontus Martin Diego Christoffer Patrick/Stefan Jonatan Shad Kevin Robin Robert]
@@ -37,6 +38,10 @@ possible_men_permutations = PossiblePermutationsResolver.new(
 
 number_of_permutations = possible_men_permutations.count
 
+probabilities = ProbabilitiesCalculator.new(
+  women, men, possible_men_permutations
+).probabilities
+
 puts "There are #{number_of_permutations} possible combinations remaining (initially 3628800)"
 puts
 
@@ -51,16 +56,11 @@ end
 print ';'
 puts men.join(';')
 
-(0...women.count).each do |i|
-  woman = women[i]
-  probabilities = men.map do |man|
-    possible_matches = possible_men_permutations.find_all do |men_permutation|
-      men_permutation[i] == man
-    end.count
-    probability = (possible_matches.to_f / number_of_permutations * 100).round(3).to_s.tr('.', ',')
-    "#{probability}%"
+probabilities.each do |woman, men_probabilities|
+  printable_probabilities = men_probabilities.map do |_, m|
+    "#{(m[:probability] * 100).round(3).to_s.tr('.', ',')}%"
   end
 
   print "#{woman};"
-  puts probabilities.join(';')
+  puts printable_probabilities.join(';')
 end
