@@ -28,7 +28,7 @@ RSpec.describe PossiblePermutationsResolver do
       resolver = PossiblePermutationsResolver.new(
         base_group,
         evaluated_group,
-        [{ woman: 'First', man: 'Uno', match: true }],
+        [Matchbox.new('First', 'Uno', true)],
         []
       )
 
@@ -44,7 +44,7 @@ RSpec.describe PossiblePermutationsResolver do
       resolver = PossiblePermutationsResolver.new(
         base_group,
         evaluated_group,
-        [{ woman: 'First', man: 'Uno', match: false }],
+        [Matchbox.new('First', 'Uno', false)],
         []
       )
 

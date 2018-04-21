@@ -9,14 +9,14 @@ women = %w[Angelica Renara Malin Anna Maria My Sanna Valle Mariele Emma]
 men = %w[Pontus Martin Diego Christoffer Patrick/Stefan Jonatan Shad Kevin Robin Robert]
 
 matchboxes = [
-  { woman: 'Mariele', man: 'Pontus', match: false },
-  { woman: 'Sanna', man: 'Robert', match: false },
-  { woman: 'Malin', man: 'Diego', match: false },
-  { woman: 'Emma', man: 'Pontus', match: false },
-  { woman: 'Maria', man: 'Shad', match: true },
-  { woman: 'Anna', man: 'Christoffer', match: false },
-  { woman: 'Malin', man: 'Kevin', match: false },
-  { woman: 'My', man: 'Jonatan', match: true }
+  Matchbox.new('Mariele', 'Pontus', false),
+  Matchbox.new('Sanna', 'Robert', false),
+  Matchbox.new('Malin', 'Diego', false),
+  Matchbox.new('Emma', 'Pontus', false),
+  Matchbox.new('Maria', 'Shad', true),
+  Matchbox.new('Anna', 'Christoffer', false),
+  Matchbox.new('Malin', 'Kevin', false),
+  Matchbox.new('My', 'Jonatan', true)
 ]
 
 # Indicies for men corresponds to `women`

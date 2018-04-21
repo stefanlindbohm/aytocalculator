@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require './lib/matchbox'
+
 class PossiblePermutationsResolver
   def initialize(base_group, evaluated_group, matchboxes, ceremonies)
     @base_group = base_group
@@ -47,7 +49,8 @@ class PossiblePermutationsResolver
     base_group_candidate, evaluated_group_candidate
   )
     matchboxes_unmatched.any? do |m|
-      m[:woman] == base_group_candidate && m[:man] == evaluated_group_candidate
+      m.base_group_candidate == base_group_candidate &&
+        m.evaluated_group_candidate == evaluated_group_candidate
     end
   end
 
@@ -55,18 +58,20 @@ class PossiblePermutationsResolver
     base_group_candidate, evaluated_group_candidate
   )
     matchboxes_matched.any? do |m|
-      m[:woman] == base_group_candidate && m[:man] != evaluated_group_candidate
+      m.base_group_candidate == base_group_candidate &&
+        m.evaluated_group_candidate != evaluated_group_candidate
     end || matchboxes_matched.any? do |m|
-      m[:man] == evaluated_group_candidate && m[:woman] != base_group_candidate
+      m.evaluated_group_candidate == evaluated_group_candidate &&
+        m.base_group_candidate != base_group_candidate
     end
   end
 
   def matchboxes_matched
-    @matchboxes_matched ||= @matchboxes.find_all { |m| m[:match] == true }
+    @matchboxes_matched ||= @matchboxes.find_all(&:match?)
   end
 
   def matchboxes_unmatched
-    @matchboxes_unmatched ||= @matchboxes.find_all { |m| m[:match] == false }
+    @matchboxes_unmatched ||= @matchboxes.find_all(&:no_match?)
   end
 
   def common_pairings(list1, list2)
