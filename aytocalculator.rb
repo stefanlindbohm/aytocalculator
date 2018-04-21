@@ -57,8 +57,8 @@ end
 print ';'
 puts men.join(';')
 
-probabilities.each do |woman, men_probabilities|
-  printable_probabilities = men_probabilities.map do |_, m|
+probabilities.each do |woman, woman_probabilities|
+  printable_probabilities = woman_probabilities.map do |_, m|
     "#{(m[:probability] * 100).round(3).to_s.tr('.', ',')}%"
   end
 
