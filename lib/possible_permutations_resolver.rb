@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require './lib/matchbox'
+require './lib/ceremony'
 
 class PossiblePermutationsResolver
   def initialize(base_group, evaluated_group, matchboxes, ceremonies)
@@ -30,8 +31,7 @@ class PossiblePermutationsResolver
 
   def number_of_common_pairings_same_as_matches_all_ceremonies?(permutation)
     @ceremonies.all? do |ceremony|
-      common_pairings(permutation, ceremony[:men]) ==
-        ceremony[:matches]
+      ceremony.number_of_common_pairs_same_as_match_count?(permutation)
     end
   end
 
@@ -72,15 +72,5 @@ class PossiblePermutationsResolver
 
   def matchboxes_unmatched
     @matchboxes_unmatched ||= @matchboxes.find_all(&:no_match?)
-  end
-
-  def common_pairings(list1, list2)
-    (0...list1.count).reduce(0) do |n, i|
-      if list1[i] == list2[i]
-        n + 1
-      else
-        n
-      end
-    end
   end
 end

@@ -63,7 +63,7 @@ RSpec.describe PossiblePermutationsResolver do
         base_group,
         evaluated_group,
         [],
-        [{ men: %w[Uno Dos Tres], matches: 1 }]
+        [Ceremony.new(%w[Uno Dos Tres], 1)]
       )
 
       expect(resolver.possible_permutations).to eq(
