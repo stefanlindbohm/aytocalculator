@@ -21,11 +21,8 @@ class PossiblePermutationsResolver
   private
 
   def all_pairs_possible_according_to_matchboxes?(evaluated_group_permutation)
-    (0...@base_group.count).all? do |i|
-      pair_possible_according_to_matchboxes?(
-        @base_group[i],
-        evaluated_group_permutation[i]
-      )
+    evaluated_group_permutation.each_with_index.all? do |candidate, i|
+      pair_possible_according_to_matchboxes?(@base_group[i], candidate)
     end
   end
 
