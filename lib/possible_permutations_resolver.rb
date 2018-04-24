@@ -3,6 +3,18 @@
 require './lib/matchbox'
 require './lib/ceremony'
 
+# Resolves all possible permutations of candidates of the `evaluated_group`
+# list based on information from lists of previous `matchboxes` and
+# `ceremonies`. Permutations corresponds index-for-index with the `base_group`
+# list of candidates.
+#
+# Starting with a complete list of permutations of `evaluated_group`,
+# permutations are removed when:
+#
+# 1. They contain pairs that are confirmed to be no matches according to
+#    previous matchboxes.
+# 2. The number of common pairs with any previous ceremony is different from
+#    each ceremony's number of confirmed couples.
 class PossiblePermutationsResolver
   def initialize(base_group, evaluated_group, matchboxes, ceremonies)
     @base_group = base_group
