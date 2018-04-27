@@ -17,7 +17,9 @@ matchboxes = [
   Matchbox.new('Maria', 'Shad', true),
   Matchbox.new('Anna', 'Christoffer', false),
   Matchbox.new('Malin', 'Kevin', false),
-  Matchbox.new('My', 'Jonatan', true)
+  Matchbox.new('My', 'Jonatan', true),
+  Matchbox.new('Angelica', 'Kevin', true),
+  Matchbox.new('Renara', 'Martin', true)
 ]
 
 # Indicies for men corresponds to `women`
